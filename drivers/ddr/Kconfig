@@ -1,0 +1,3 @@
+source "drivers/ddr/altera/Kconfig"
+source "drivers/ddr/imx/Kconfig"
+

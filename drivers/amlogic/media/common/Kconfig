@@ -1,0 +1,3 @@
+source "drivers/amlogic/media/common/vpu/Kconfig"
+source "drivers/amlogic/media/common/vpp/Kconfig"
+

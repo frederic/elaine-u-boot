@@ -1,0 +1,15 @@
+if TARGET_SM1_ELAINE_P2
+
+config SYS_SOC
+	default "g12a"
+
+config SYS_BOARD
+	default "sm1_elaine_p2"
+
+config SYS_VENDOR
+	default "amlogic"
+
+config SYS_CONFIG_NAME
+	default "sm1_elaine_p2"
+
+endif

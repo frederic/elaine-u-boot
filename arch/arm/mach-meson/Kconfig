@@ -1,0 +1,197 @@
+if ARCH_MESON
+
+config MESON64_COMMON
+	bool
+	select ARM64
+	select CLK
+	select DM
+	select DM_SERIAL
+	select SYSCON
+	select REGMAP
+	select BOARD_LATE_INIT
+	imply CMD_DM
+
+config MESON_GX
+	bool
+	select MESON64_COMMON
+
+choice
+	prompt "Platform select"
+	default MESON_GXBB
+
+config MESON_GXBB
+	bool "GXBB"
+	select MESON_GX
+	help
+	  Select this if your SoC is an S905
+
+config MESON_GXL
+	bool "GXL"
+	select MESON_GX
+	help
+	  Select this if your SoC is an S905X/D or S805X
+
+config MESON_GXM
+	bool "GXM"
+	select MESON_GX
+	help
+	  Select this if your SoC is an S912
+
+config MESON_AXG
+	bool "AXG"
+	select MESON64_COMMON
+	help
+		Select this if your SoC is an A113X/D
+
+config MESON_G12A
+	bool "G12A"
+	select ARM64
+	select DM
+	select DM_SERIAL
+	help
+		Support Amlogic Meson G12A (S905D2/S905X2/S905Y2 etc..)
+
+config MESON_G12B
+	bool "Support Amlogic Meson G12B Series SoC"
+	select ARM64
+	select DM
+	select DM_SERIAL
+	help
+		Support Amlogic Meson G12B (A311D etc..)
+
+endchoice
+
+config AML_BL33_COMPRESS_ENABLE
+	bool "Amlogic U-boot compress"
+	help
+		Support U-boot compress function
+
+config AML_SECURE_BOOT_V3
+	bool "Amlogic SecureBoot V3"
+	help
+		"Support Amlogic SecureBoot V3 version"
+
+config FIP_IMG_SUPPORT
+	bool "Amlogic FIP IMG format file"
+	help
+		"Support Amlogic FIP IMG format"
+
+config AML_SECURE_UBOOT
+	bool "Amlogic SecureBoot function"
+	help
+		"Support Amlogic SecureBoot function"
+
+config AML_CRYPTO_UBOOT
+	bool "Encrypt Amlogic U-boot"
+	help
+		"Support U-boot encrypt function"
+
+config AML_TSENSOR
+	bool "Amlogic Temp Sensor"
+	help
+		"Support Amlogic Thermal Sensor"
+
+config AML_TSENSOR_COOL
+	bool "Amlogic HIGH TEMP COOL"
+	depends on AML_TSENSOR
+	help
+		"Support Amlogic High Temperature Cool"
+
+config AML_OSCRING
+	bool "Amlogic OSCRING MSR"
+	help
+		"Support Amlogic chip oscring msr"
+
+if MESON_GXBB
+
+config TARGET_ODROID_C2
+	bool "ODROID-C2"
+	help
+	  ODROID-C2 is a single board computer based on Meson GXBaby
+	  with 2 GiB of RAM, Gigabit Ethernet, HDMI, 4 USB, micro-SD
+	  slot, eMMC, IR receiver and a 40-pin GPIO header.
+
+endif
+
+if MESON_GXL
+
+config SYS_SOC
+	default "gxl"
+
+config TARGET_P212
+	bool "P212"
+	help
+	  P212 is a reference dessign board based on Meson GXL S905X SoC
+	  with 2 GiB of RAM, Ethernet, HDMI, 2 USB, micro-SD slot,
+	  eMMC, IR receiver, CVBS+Audio jack and a SDIO WiFi module.
+
+config TARGET_LIBRETECH_CC
+	bool "LIBRETECH-CC"
+	help
+	  LibreTech CC is a single board computer based on Meson GXL
+	  with 2 GiB of RAM, Ethernet, HDMI, 4 USB, micro-SD slot,
+	  eMMC, IR receiver and a 40-pin GPIO header.
+
+config TARGET_KHADAS_VIM
+	bool "KHADAS-VIM"
+	help
+	  Khadas VIM is a single board computer based on Meson GXL
+	  with 2 GiB of RAM, Ethernet, HDMI, 4 USB, micro-SD slot,
+	  eMMC, IR receiver and a 40-pin GPIO header.
+
+endif
+
+# G12A series boards
+
+if MESON_G12A
+
+config SYS_SOC
+	default "g12a"
+
+config TARGET_G12A_U200_V1
+	bool "G12A_U200_V1"
+
+config TARGET_G12A_U211_V1
+	bool "G12A_U211_V1"
+
+config TARGET_SM1_ELAINE_P1
+	bool "SM1_ELAINE_P1"
+
+config TARGET_SM1_ELAINE_P2
+	bool "SM1_ELAINE_P2"
+
+config TARGET_SM1_ELAINE_B1
+	bool "SM1_ELAINE_B1"
+
+config TARGET_SM1_ELAINE_BX
+	bool "SM1_ELAINE_BX"
+
+endif
+
+if MESON_G12B
+
+config SYS_SOC
+	default "g12b"
+
+config TARGET_G12B_W400_V1
+	bool "G12B_W400_V1"
+
+config TARGET_G12B_NEWMAN_PX
+       bool "G12B_NEWMAN_PX"
+
+config TARGET_G12B_NEWMAN_BX
+       bool "G12B_NEWMAN_BX"
+
+config TARGET_G12B_PUDDY_PX
+       bool "G12B_PUDDY_PX"
+
+endif
+
+
+config SYS_MALLOC_F_LEN
+	default 0x1000
+
+source "board/amlogic/Kconfig"
+
+endif
+

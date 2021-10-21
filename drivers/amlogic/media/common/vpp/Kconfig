@@ -1,0 +1,5 @@
+config AML_VPP
+	bool "AML VPP drivers Support"
+	help
+	  Enable support for the Amlogic VPP drivers.
+

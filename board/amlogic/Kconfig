@@ -1,0 +1,156 @@
+# function list
+
+config AML_BL33_COMPRESS_ENABLE
+	bool "Amlogic U-boot compress"
+	help
+		Support U-boot compress function
+
+config AML_SECURE_BOOT_V3
+	bool "Amlogic SecureBoot V3"
+	help
+		"Support Amlogic SecureBoot V3 version"
+
+config FIP_IMG_SUPPORT
+	bool "Amlogic FIP IMG format file"
+	help
+		"Support Amlogic FIP IMG format"
+
+config AML_SECURE_UBOOT
+	bool "Amlogic SecureBoot function"
+	help
+		"Support Amlogic SecureBoot function"
+
+config AML_CRYPTO_UBOOT
+	bool "Encrypt Amlogic U-boot"
+	help
+		"Support U-boot encrypt function"
+
+config AML_TSENSOR
+	bool "Amlogic Temp Sensor"
+	help
+		"Support Amlogic Thermal Sensor"
+
+config AML_TSENSOR_COOL
+	bool "Amlogic HIGH TEMP COOL"
+	depends on AML_TSENSOR
+	help
+		"Support Amlogic High Temperature Cool"
+
+config AML_OSCRING
+	bool "Amlogic OSCRING MSR"
+	help
+		"Support Amlogic chip oscring msr"
+
+config SYS_VENDOR
+	string "Vendor name"
+	default "amlogic"
+	help
+	  This option contains information about board name.
+	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+	  be used.
+
+config NEED_BL32
+	bool "Enable bl32"
+	default n
+	help
+		"Support bl32 function"
+
+config MULTI_DTB
+	bool "Amlogic Multi-DT function"
+	default n
+	help
+		"Support Multi-DT function"
+
+if MESON_GXBB
+
+config TARGET_ODROID_C2
+	bool "ODROID-C2"
+	help
+	  ODROID-C2 is a single board computer based on Meson GXBaby
+	  with 2 GiB of RAM, Gigabit Ethernet, HDMI, 4 USB, micro-SD
+	  slot, eMMC, IR receiver and a 40-pin GPIO header.
+
+endif
+
+if MESON_GXL
+
+config SYS_SOC
+	default "gxl"
+
+config TARGET_P212
+	bool "P212"
+	help
+	  P212 is a reference dessign board based on Meson GXL S905X SoC
+	  with 2 GiB of RAM, Ethernet, HDMI, 2 USB, micro-SD slot,
+	  eMMC, IR receiver, CVBS+Audio jack and a SDIO WiFi module.
+
+config TARGET_LIBRETECH_CC
+	bool "LIBRETECH-CC"
+	help
+	  LibreTech CC is a single board computer based on Meson GXL
+	  with 2 GiB of RAM, Ethernet, HDMI, 4 USB, micro-SD slot,
+	  eMMC, IR receiver and a 40-pin GPIO header.
+
+config TARGET_KHADAS_VIM
+	bool "KHADAS-VIM"
+	help
+	  Khadas VIM is a single board computer based on Meson GXL
+	  with 2 GiB of RAM, Ethernet, HDMI, 4 USB, micro-SD slot,
+	  eMMC, IR receiver and a 40-pin GPIO header.
+
+endif
+
+# G12A series boards
+
+if MESON_G12A
+
+config SYS_SOC
+	default "g12a"
+
+config TARGET_G12A_U200_V1
+	bool "G12A_U200_V1"
+
+config TARGET_G12A_U211_V1
+	bool "G12A_U211_V1"
+
+config TARGET_SM1_AC200_V1
+	bool "SM1_AC200_V1"
+
+config TARGET_SM1_ELAINE_P0
+	bool "SM1_ELAINE_P0"
+
+endif
+
+if MESON_G12B
+
+config SYS_SOC
+	default "g12b"
+
+config TARGET_G12B_W400_V1
+	bool "G12B_W400_V1"
+
+endif
+
+# Amlogic boards
+
+source "board/amlogic/g12a_u200_v1/Kconfig"
+
+source "board/amlogic/g12b_w400_v1/Kconfig"
+
+source "board/amlogic/sm1_ac200_v1/Kconfig"
+
+source "board/amlogic/g12b_newman_px/Kconfig"
+
+source "board/amlogic/g12b_newman_bx/Kconfig"
+
+source "board/amlogic/g12b_puddy_px/Kconfig"
+
+source "board/amlogic/sm1_elaine_p0/Kconfig"
+
+source "board/amlogic/sm1_elaine_p1/Kconfig"
+
+source "board/amlogic/sm1_elaine_p2/Kconfig"
+
+source "board/amlogic/sm1_elaine_b1/Kconfig"
+
+source "board/amlogic/sm1_elaine_bx/Kconfig"

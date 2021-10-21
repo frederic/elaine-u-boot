@@ -1,0 +1,190 @@
+config AML_CMD
+	bool "Amlogic command"
+	default y
+	help
+	 support amlogic commands
+
+config AML_RPMB_DISABLE
+	bool "support RPMB set in bootargs"
+	default n
+	help
+	  Support RPMB set in bootargs.
+
+config AML_STORAGE
+	bool "aml storage support"
+	help
+	  storage cmd support
+
+config AML_IMG_READ
+	depends on AML_STORAGE
+	bool "image read"
+	default y
+	help
+	  based on AML_STORAGE
+	  read image without specify size
+
+config AML_DEFENV
+	bool "aml defenv_without"
+	default y
+	help
+	  support reserv env from c array
+
+config CMD_RSVMEM
+	bool "rsvmem cmd"
+	default y
+	help
+	  support rsvmem cmd
+
+config CMD_DDR_D2PLL
+	bool "d2pll cmd"
+	default n
+	help
+	  support d2pll cmd
+
+config CMD_DDR_TEST
+	bool "ddr test cmd"
+	default n
+	help
+	  support ddr_test cmd
+
+config CMD_REBOOT
+	bool "CMD_REBOOT"
+	depends on MMC_FTS || NAND_FTS
+	help
+	 CMD_REBOOT support.
+
+config CMD_FACTORY_BOOT
+	bool "CMD_FACTORY_BOOT"
+	depends on MMC_FTS || NAND_FTS
+	help
+	 CMD_FACTORY_BOOT support.
+
+config MMC_FTS
+	bool "MMC_FTS"
+	default y
+	help
+	 MMC_FTS support.
+
+config NAND_FTS
+	bool "NAND_FTS"
+	default n
+	help
+	 NAND_FTS support.
+
+config AML_RPMB_DISABLE
+	bool "support RPMB set in bootargs"
+	default n
+	help
+	 Support RPMB set in bootargs.
+
+config CMD_DDR_D2PLL
+	bool "d2pll cmd"
+	default n
+	help
+	 support d2pll cmd
+
+config CMD_DDR_TEST
+	bool "ddr test cmd"
+	default n
+	help
+	 support ddr_test cmd
+
+config IMG_SECURE_CHECK_SZ
+	int "secure boot size limitation"
+	default 0
+	help
+	 Check if boot image size is larger than
+	 the secure boot size limitation
+
+config CMD_AVB
+    bool "avb operations"
+    default n
+    help
+     support avb operations
+
+config CMD_CVBS
+	bool "cvbs command for video"
+	depends on CMDLINE && AML_CVBS
+	default n
+	help
+	 support cvbs operations
+
+config CMD_LCD
+	bool "lcd command for video"
+	depends on CMDLINE && AML_LCD
+	default n
+	help
+	 support lcd operations
+
+config AML_CMD_OSD
+	bool "osd command for video"
+	depends on CMDLINE && AML_OSD
+	default n
+	help
+	 support osd operations
+
+config CMD_VPU
+	bool "vpu command for video"
+	depends on CMDLINE && AML_VPU
+	default n
+	help
+	 support vpu operations
+
+config CMD_VPP
+	bool "vpp command for video"
+	depends on CMDLINE && AML_VPP
+	default n
+	help
+	 support vpp operations
+
+config CMD_VOUT
+	bool "output video"
+	depends on CMDLINE && AML_VOUT
+	default n
+	help
+	 support vout operations
+
+config CMD_HDMITX
+	bool "hdmi sub-system"
+	depends on CMDLINE && AML_HDMITX
+	default n
+	help
+	 support hdmi operations
+
+config CMD_TSENSOR
+	bool "cpu temp-system"
+	default n
+	help
+	 support temp-system operations
+
+config CMD_OSCRING
+	bool "Amlogic measure ring"
+	default n
+	help
+	 for get chip ring info
+
+config CMD_STORAGE
+	bool "STORE sub-system"
+	default n
+	help
+	 support store command
+
+config BOOTLOADER_CONTROL_BLOCK
+	bool "support bootloader control block"
+	default n
+	help
+	 support bcb avb bootctrl module
+
+config CMD_BOOTCTOL_AVB
+	bool "support avb boot"
+	depends on BOOTLOADER_CONTROL_BLOCK
+	default n
+	help
+	 support avb operation command
+
+config G_AB_SYSTEM
+	bool "support ab boot for bootloader system"
+	depends on CMD_BOOTCTOL_AVB
+	default n
+	help
+	 support ab system operation
