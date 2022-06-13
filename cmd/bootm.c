@@ -92,8 +92,8 @@ static int do_bootm_subcommand(cmd_tbl_t *cmdtp, int flag, int argc,
 
 static int is_secure_boot_enabled(void)
 {
-	    const unsigned long cfg10 = readl(AO_SEC_SD_CFG10);
-		    return ( cfg10 & (0x1<< 4) );
+	printf("bootm.c::is_secure_boot_enabled(): nope!\n");
+	return 0;
 }
 
 /*******************************************************************/
@@ -148,10 +148,10 @@ int do_bootm(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	const char *is_boot_external_image = env_get("boot_external_image");
 	if (is_boot_external_image && !strcmp(is_boot_external_image, "1")) {
 		printf("aml log : boot from usb\n");
-		nRet = aml_sec_boot_check(AML_D_P_EXT_IMG_DECRYPT_V3, nLoadAddr, GXB_IMG_SIZE, GXB_IMG_DEC_ALL);
+		nRet = 0;//aml_sec_boot_check(AML_D_P_EXT_IMG_DECRYPT_V3, nLoadAddr, GXB_IMG_SIZE, GXB_IMG_DEC_ALL);
 	} else {
 		printf("aml log : boot from nand or emmc\n");
-		nRet = aml_sec_boot_check(AML_D_P_IMG_DECRYPT_V3, nLoadAddr, GXB_IMG_SIZE, GXB_IMG_DEC_ALL);
+		nRet = 0;//aml_sec_boot_check(AML_D_P_IMG_DECRYPT_V3, nLoadAddr, GXB_IMG_SIZE, GXB_IMG_DEC_ALL);
 		pr_info("AML_D_P_IMG_DECRYPT_V3: 0x%x\n", AML_D_P_IMG_DECRYPT_V3);
 		pr_info("nLoadAddr: 0x%x\n", nLoadAddr);
 		pr_info("GXB_IMG_SIZE: 0x%x\n", GXB_IMG_SIZE);
