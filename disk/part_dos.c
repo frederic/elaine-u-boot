@@ -89,7 +89,7 @@ static int test_block_type(unsigned char *buffer)
 static int part_test_dos(struct blk_desc *dev_desc)
 {
 #ifndef CONFIG_SPL_BUILD
-	ALLOC_CACHE_ALIGN_BUFFER(legacy_mbr, mbr, 1);
+	ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, mbr, 1, dev_desc->blksz);
 
 	if (blk_dread(dev_desc, 0, 1, (ulong *)mbr) != 1)
 		return -1;
