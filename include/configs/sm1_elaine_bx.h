@@ -112,25 +112,18 @@
 			"hw_id=${hw_id} " \
 			"chip_type=${chip_type} " \
 			"androidboot.reboot_mode=${reboot_mode} " \
-			"androidboot.slot_suffix=${active_slot};" \
+			"androidboot.slot_suffix=${active_slot} " \
+			"console=ttyS0,115200n8 debug=1 ignore_loglevel=1 earlycon=aml_uart,0xff803000;" \
 		"\0" \
 	"switch_bootmode=" \
-		"get_rebootmode;" \
-		"echo reboot_mode:${reboot_mode};"\
-		"if test ${reboot_mode} = factory_reset; then " \
-			"run recovery_from_flash;" \
-		"else if test ${reboot_mode} = update; then " \
-			"run update;" \
-		"else if test ${reboot_mode} = cold_boot; then " \
-			"echo cold_boot; " \
-		"else if test ${reboot_mode} = fastboot; then " \
-			"fastboot;" \
-		"else if test ${reboot_mode} = factory_boot; then " \
-			"if imgread kernel system_b ${loadaddr}; then " \
-				"bootm ${loadaddr};" \
+		"while true ;do " \
+			"usb reset; " \
+			"if fatload usb 0 1000000 u-boot-elaine.cmd; then "\
+				"env import -t ${fileaddr} ${filesize};" \
+				"run pwnboot;" \
 			"fi;" \
-		"fi;fi;fi;fi;fi;" \
-			"\0" \
+		"done;" \
+		"\0" \
 	"detect_ab_slot=" \
 		"get_valid_slot;" \
 		"\0" \
