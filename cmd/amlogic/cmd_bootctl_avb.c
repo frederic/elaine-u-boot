@@ -300,21 +300,7 @@ bool boot_info_load(AvbABData *out_info, char *miscbuf)
 
 bool boot_info_save(AvbABData *info, char *miscbuf)
 {
-    char *partition = "misc";
-    printf("save boot-info \n");
-#ifdef CONFIG_G_AB_SYSTEM
-    info->crc32 = avb_crc32((const uint8_t*)info, sizeof(AvbABData) - sizeof(uint32_t));
-    memcpy(miscbuf, info, AVB_AB_DATA_SIZE);
-#else
-    info->crc32 = avb_htobe32(
-      avb_crc32((const uint8_t*)info, sizeof(AvbABData) - sizeof(uint32_t)));
-
-    memcpy(miscbuf+AB_METADATA_MISC_PARTITION_OFFSET, info, AVB_AB_DATA_SIZE);
-#endif
-#ifdef BL33_DEBUG_PRINT
-    dump_boot_info(info);
-#endif
-    store_write((unsigned char *)partition, 0, MISCBUF_SIZE, (unsigned char *)miscbuf);
+    // remove dangerous code that can brick device : if AvbABSlotData.tries_remaining reaches 0, BL2 refuses to boot ("A/B system: slot_a and slot_b are unbootalbe")
     return true;
 }
 

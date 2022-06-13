@@ -203,21 +203,7 @@ bool boot_info_load(BrilloBootInfo *out_info, char *miscbuf)
 
 bool boot_info_save(BrilloBootInfo *info, char *miscbuf)
 {
-    char *partition = "misc";
-    printf("save boot-info \n");
-    memcpy(miscbuf+BOOTINFO_OFFSET, info, SLOTBUF_SIZE);
-    dump_boot_info(info);
-#ifdef CONFIG_AML_MTD
-    if (NAND_BOOT_FLAG == device_boot_flag || SPI_NAND_FLAG == device_boot_flag) {
-        int ret = 0;
-        ret = run_command("store erase partition misc", 0);
-        if (ret != 0) {
-            printf("erase partition misc failed!\n");
-            return false;
-        }
-    }
-#endif
-    store_write((unsigned char *)partition, 0, MISCBUF_SIZE, (unsigned char *)miscbuf);
+    // remove dangerous code that can brick device : if AvbABSlotData.tries_remaining reaches 0, BL2 refuses to boot ("A/B system: slot_a and slot_b are unbootalbe")
     return true;
 }
 
